@@ -1,11 +1,11 @@
+"use strict";
 import { getUrl } from "./api.js";
+import { createCharacterContent } from "./characterContent.js";
 
 async function createEpisodeContent(
   content,
-  contentNode,
-  createCharacterContent,
-  createOriginContent
-) {
+  contentNode
+ ) {
   const html = `<div class="flex-none card bordered pl-6">
     <div class="card-body"><h1 class="card-title">${content.name}</h1></div>
     <div>${content.air_date} | ${content.episode}</div>
@@ -29,9 +29,7 @@ async function createEpisodeContent(
     characterButton.onclick = async () => {
       await createCharacterContent(
         character,
-        contentNode,
-        createEpisodeContent,
-        createOriginContent
+        contentNode
       );
     };
 

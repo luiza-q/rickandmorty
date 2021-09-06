@@ -1,8 +1,6 @@
 import { createHeader } from "./header.js";
 import { createSidebar } from "./sidebar.js";
 import { createEpisodeContent } from "./episodeContent.js";
-import { createCharacterContent } from "./characterContent.js";
-import { createOriginContent } from "./originContent.js";
 import { getEpisode } from "./api.js";
 
 async function init() {
@@ -18,9 +16,7 @@ async function init() {
     const content = await getEpisode(id);
     createEpisodeContent(
       content,
-      contentNode,
-      createCharacterContent,
-      createOriginContent
+      contentNode
     );
   }
 }

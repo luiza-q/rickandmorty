@@ -1,13 +1,15 @@
+"use strict";
 import { getUrl } from "./api.js";
+import { createOriginContent } from "./originContent.js";
+import { createEpisodeContent } from "./episodeContent.js"
+
 
 async function createCharacterContent(
   character,
-  contentNode,
-  createEpisodeContent,
-  createOriginContent
+  contentNode
 ) {
-  const html = `<div class="flex-none card bordered pl-6">
-    <img src="${character.image}" alt="character profile image" class="max-h-7 max-w-7">
+  const html = `<div class="flex-none pl-6">
+    <img src="${character.image}" alt="character profile image" class="max-h-md max-w-md">
     <div class="card-body">
       <h1 class="card-title">${character.name}</h1>
       <p id="character-info">${character.species} | ${character.status} | ${character.gender} | </p>
@@ -20,11 +22,9 @@ async function createCharacterContent(
   originButton.innerText = character.origin.name;
   originButton.onclick = async () => {
     const origin = await getUrl(character.origin.url);
-    createOriginContent(
+    await createOriginContent(
       origin,
-      contentNode,
-      createEpisodeContent,
-      createCharacterContent
+      contentNode
     );
   };
 
@@ -47,9 +47,7 @@ async function createCharacterContent(
     episodeButton.onclick = async () => {
       await createEpisodeContent(
         response,
-        contentNode,
-        createEpisodeContent,
-        createCharacterContent
+        contentNode
       );
     };
 

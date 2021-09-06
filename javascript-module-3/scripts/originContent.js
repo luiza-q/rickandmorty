@@ -1,10 +1,10 @@
+"use strict";
 import { getUrl as getCharacter } from "./api.js";
+import { createCharacterContent } from "./characterContent.js";
 
 async function createOriginContent(
   origin,
-  contentNode,
-  createContent,
-  createCharacterContent
+  contentNode
 ) {
   const html = `<div class="card bordered card-body">
     <h1 class="card-title">${origin.name}</h1>
@@ -25,11 +25,9 @@ async function createOriginContent(
 
     const characterButton = document.createElement("button");
     characterButton.onclick = async () => {
-      createCharacterContent(
+      await createCharacterContent(
         character,
-        contentNode,
-        createContent,
-        createOriginContent
+        contentNode
       );
     };
 
